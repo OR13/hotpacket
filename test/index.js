@@ -32,28 +32,29 @@ describe('HotPacket', function() {
         });
     });
 
-    describe('#open(_env)', function() {
+    describe('#decrypt(_env)', function() {
         it('should return the HotPacketEnvelope with its body decrypted', function() {
             var myObject = {
                 foo: "bar"
             };
             var env = HotPacket.new(myObject);
             assert.equal(env.encrypted, false)
-            var closed_env = HotPacket.close(env);
-            assert.equal(closed_env.encrypted, true);
-            var opened_env = HotPacket.open(closed_env);
+            var encrypted_env = HotPacket.encrypt(env);
+            assert.equal(encrypted_env.encrypted, true);
+            var decrypted_env = HotPacket.decrypt(encrypted_env);
+            assert.equal(decrypted_env.encrypted, false);
         });
     });
 
-    describe('#close(_env)', function() {
+    describe('#encrypt(_env)', function() {
         it('should return the HotPacketEnvelope with its body encrypted', function() {
             var myObject = {
                 foo: "bar"
             };
             var env = HotPacket.new(myObject);
             assert.equal(env.encrypted, false)
-            var closed_env = HotPacket.close(env);
-            assert.equal(closed_env.encrypted, true);
+            var encrypted_env = HotPacket.encrypt(env);
+            assert.equal(encrypted_env.encrypted, true);
         });
     });
 });

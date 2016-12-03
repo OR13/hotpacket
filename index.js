@@ -3,7 +3,8 @@ var sjcl = require("./src/sjcl");
 
 var msg = require("./src/msg");
 
-exports = module.exports = function () {
+
+var HotPacket = function() {
     return {
         sjcl: sjcl,
         msg: msg,
@@ -16,14 +17,17 @@ exports = module.exports = function () {
         obj: (_env) => {
             return msg.obj(_env);
         },
-        open: (_env) => {
+        decrypt: (_env) => {
+
+            _env = JSON.parse(JSON.stringify(_env));
+
             // if this _env is an HotPacketEnvelope
             // better type checking should happen here...
             if (_env.type === 'HotPacketEnvelope') {
                 // if _env is an encrypted HotPacketEnvelope decrypt and return the object
                 if (_env.encrypted) {
                     _env.body = sjcl.decryptObject(config.password, msg.obj(_env));
-                    _env.encrypted.false = true;
+                    _env.encrypted = false;
                 } else {
                     throw 'HotPacket.open called on an un-encrypted HotPacketEnvelope object (_env already plaintext!)';
                 }
@@ -32,7 +36,10 @@ exports = module.exports = function () {
             }
             return _env;
         },
-        close: (_env) => {
+        encrypt: (_env) => {
+            
+            _env = JSON.parse(JSON.stringify(_env));
+
             // if this _env is an HotPacketEnvelope
             // better type checking should happen here...
             // console.log(_env)
@@ -51,3 +58,8 @@ exports = module.exports = function () {
         }
     }
 } ()
+
+if (typeof window !== 'undefined') {
+    window.HotPacket = HotPacket
+}
+exports = module.exports = HotPacket;

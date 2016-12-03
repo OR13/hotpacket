@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "build": "browserify index.js -o dist/hotpacket.js",
+    "compile": "browserify index.js -o docs/hotpacket.js",
+    "build": "cp docs/hotpacket.js dist",
     "test": "mocha"
   },
   "repository": {

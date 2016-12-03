@@ -1,1 +1,96 @@
-hello world...
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>HotPacket</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
+
+    <script src="//ajaxorg.github.io/ace-builds/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="hotpacket.js"></script>
+
+    <style>
+        .editor {
+            position: relative;
+            height: 400px;
+            width: 100%
+        }
+    </style>
+
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+    <nav>
+        <div class="nav-wrapper amber darken-3">
+            <a style="padding-left: 16px" href="#" class="brand-logo">HotPacket</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="https://github.com/OR13/hotpacket">Github</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="editor" id="editor">
+    </div>
+
+    <script>
+
+        var editor = ace.edit("editor");
+
+        editor.getSession().setUseWorker(false);
+        editor.setTheme("ace/theme/monokai");
+
+        editor.getSession().setMode("ace/mode/javascript");
+
+        var code = `
+HotPacket.init({ password: 'shared_secret' }); 
+
+var newEnvelope = HotPacket.new({ 
+    type: "update_name", 
+    data: { id: 0, name: "billy" } 
+});
+
+console.log('newEnvelope: ', newEnvelope)
+
+var encryptedEnvelope = HotPacket.encrypt(newEnvelope);
+
+console.log('encryptedEnvelope: ', encryptedEnvelope)
+
+
+var decryptedEnvelope = HotPacket.decrypt(encryptedEnvelope);
+
+console.log('decryptedEnvelope: ', decryptedEnvelope)
+
+// console.log(newEnvelope === decryptedEnvelope);
+
+console.log('newEnvelope: ', JSON.stringify(newEnvelope));
+console.log('decryptedEnvelope: ', JSON.stringify(decryptedEnvelope));
+
+`;
+        editor.setValue(code);
+        eval(code);
+    </script>
+
+</body>
+
+</html>

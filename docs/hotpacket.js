@@ -18,7 +18,10 @@ var HotPacket = function() {
         obj: (_env) => {
             return msg.obj(_env);
         },
-        open: (_env) => {
+        decrypt: (_env) => {
+
+            _env = JSON.parse(JSON.stringify(_env));
+
             // if this _env is an HotPacketEnvelope
             // better type checking should happen here...
             if (_env.type === 'HotPacketEnvelope') {
@@ -34,7 +37,10 @@ var HotPacket = function() {
             }
             return _env;
         },
-        close: (_env) => {
+        encrypt: (_env) => {
+            
+            _env = JSON.parse(JSON.stringify(_env));
+
             // if this _env is an HotPacketEnvelope
             // better type checking should happen here...
             // console.log(_env)
@@ -54,8 +60,10 @@ var HotPacket = function() {
     }
 } ()
 
-
-exports = module.exports = window.HotPacket = HotPacket;
+if (typeof window !== 'undefined') {
+    window.HotPacket = HotPacket
+}
+exports = module.exports = HotPacket;
 
 },{"./src/msg":137,"./src/sjcl":138}],2:[function(require,module,exports){
 var asn1 = exports;
