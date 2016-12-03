@@ -28,7 +28,7 @@ var HotPacket = function() {
                 // if _env is an encrypted HotPacketEnvelope decrypt and return the object
                 if (_env.encrypted) {
                     _env.body = sjcl.decryptObject(config.password, msg.obj(_env));
-                    _env.encrypted.false = true;
+                    _env.encrypted = false;
                 } else {
                     throw 'HotPacket.open called on an un-encrypted HotPacketEnvelope object (_env already plaintext!)';
                 }
@@ -56,6 +56,9 @@ var HotPacket = function() {
                 throw 'HotPacket.close called on none HotPacketEnvelope object';
             }
             return _env;
+        },
+        isEqual: (_obj_a, _obj_b)=>{
+            return JSON.stringify(_obj_a) === JSON.stringify(_obj_b);
         }
     }
 } ()

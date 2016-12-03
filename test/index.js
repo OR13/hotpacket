@@ -10,6 +10,7 @@ describe('HotPacket', function() {
         })
     });
 
+
     describe('#new(_obj)', function() {
         it('should return the a decrypted HotPacketEnvelope with _obj body as its body', function() {
             var myObject = {
@@ -57,5 +58,18 @@ describe('HotPacket', function() {
             assert.equal(encrypted_env.encrypted, true);
         });
     });
+
+    describe('#isEqual(a, b)', function() {
+        it('should return true if object strings are equal', function() {
+            var results = HotPacket.isEqual({}, {});
+            assert.equal(results, true);
+        });
+
+        it('should return false if object strings are not equal', function() {
+            var results = HotPacket.isEqual({}, { b: 'c' });
+            assert.equal(results, false);
+        });
+    });
+
 });
 

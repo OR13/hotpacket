@@ -55,6 +55,9 @@ var HotPacket = function() {
                 throw 'HotPacket.close called on none HotPacketEnvelope object';
             }
             return _env;
+        },
+        isEqual: (_obj_a, _obj_b)=>{
+            return JSON.stringify(_obj_a) === JSON.stringify(_obj_b);
         }
     }
 } ()

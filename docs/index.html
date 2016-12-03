@@ -76,15 +76,15 @@ var encryptedEnvelope = HotPacket.encrypt(newEnvelope);
 
 console.log('encryptedEnvelope: ', encryptedEnvelope)
 
-
 var decryptedEnvelope = HotPacket.decrypt(encryptedEnvelope);
 
 console.log('decryptedEnvelope: ', decryptedEnvelope)
 
-// console.log(newEnvelope === decryptedEnvelope);
+console.log("HotPacket.isEqual(newEnvelope, decryptedEnvelope): ", HotPacket.isEqual(newEnvelope, decryptedEnvelope) );
 
-console.log('newEnvelope: ', JSON.stringify(newEnvelope));
-console.log('decryptedEnvelope: ', JSON.stringify(decryptedEnvelope));
+console.log("are objects equal: ", newEnvelope === decryptedEnvelope);
+
+console.log("are object strings equal: ",  JSON.stringify(newEnvelope) === JSON.stringify(decryptedEnvelope));
 
 `;
         editor.setValue(code);
