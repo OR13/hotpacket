@@ -6,7 +6,7 @@ describe('HotPacket.sjcl', function () {
 
     describe('#encryptObject(password, object)', function () {
 
-        it('should throw error when password is anull, undefined or empty string.', function () {
+        it('should throw error when password is null, undefined or empty string.', function () {
             var encrypted_object;
 
             try {
@@ -36,7 +36,7 @@ describe('HotPacket.sjcl', function () {
 
     describe('#decryptObject(password, encrypted_object)', function () {
 
-        it('should throw error when password is anull, undefined or empty string.', function () {
+        it('should throw error when password is null, undefined or empty string.', function () {
             var object;
 
             try {

@@ -1,4 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function (Buffer){
 
 var sjcl = require("./src/sjcl");
 
@@ -19,12 +20,11 @@ var HotPacket = function() {
             return msg.obj(_env);
         },
         decrypt: (_env) => {
-
+            // copy object for immutability
             _env = JSON.parse(JSON.stringify(_env));
-
             // if this _env is an HotPacketEnvelope
             // better type checking should happen here...
-            if (_env.type === 'HotPacketEnvelope') {
+            if (_env !== undefined && _env.type === 'HotPacketEnvelope') {
                 // if _env is an encrypted HotPacketEnvelope decrypt and return the object
                 if (_env.encrypted) {
                     _env.body = sjcl.decryptObject(config.password, msg.obj(_env));
@@ -38,13 +38,12 @@ var HotPacket = function() {
             return _env;
         },
         encrypt: (_env) => {
-            
+            // copy object for immutability
             _env = JSON.parse(JSON.stringify(_env));
-
             // if this _env is an HotPacketEnvelope
             // better type checking should happen here...
             // console.log(_env)
-            if (_env.type === 'HotPacketEnvelope') {
+            if (_env !== undefined && _env.type === 'HotPacketEnvelope') {
                 // if _env is an encrypted HotPacketEnvelope decrypt and return the object
                 if (_env.encrypted) {
                     throw 'HotPacket.close called on an encrypted HotPacketEnvelope object (_env already encrypted!)';
@@ -57,8 +56,14 @@ var HotPacket = function() {
             }
             return _env;
         },
-        isEqual: (_obj_a, _obj_b)=>{
+        isEqual: (_obj_a, _obj_b) => {
             return JSON.stringify(_obj_a) === JSON.stringify(_obj_b);
+        },
+        encodeBase64: (_env) => {
+            return new Buffer(JSON.stringify(_env)).toString('base64')
+        },
+        decodeBase64: (_string) => {
+            return JSON.parse(Buffer(_string, 'base64').toString('ascii'));
         }
     }
 } ()
@@ -68,7 +73,8 @@ if (typeof window !== 'undefined') {
 }
 exports = module.exports = HotPacket;
 
-},{"./src/msg":137,"./src/sjcl":138}],2:[function(require,module,exports){
+}).call(this,require("buffer").Buffer)
+},{"./src/msg":137,"./src/sjcl":138,"buffer":46}],2:[function(require,module,exports){
 var asn1 = exports;
 
 asn1.bignum = require('bn.js');

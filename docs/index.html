@@ -86,6 +86,28 @@ console.log("are objects equal: ", newEnvelope === decryptedEnvelope);
 
 console.log("are object strings equal: ",  JSON.stringify(newEnvelope) === JSON.stringify(decryptedEnvelope));
 
+var myObject = {
+    foo: "bar"
+};
+
+var env = HotPacket.new(myObject);
+
+var b64Env = HotPacket.encodeBase64(env);
+
+var expected = 'eyJ0eXBlIjoiSG90UGFja2V0RW52ZWxvcGUiLCJlbmNyeXB0ZWQiOmZhbHNlLCJib2R5Ijp7ImZvbyI6ImJhciJ9fQ==';
+
+console.log('expect true: ', b64Env ===  expected);
+
+var encoded = 'eyJ0eXBlIjoiSG90UGFja2V0RW52ZWxvcGUiLCJlbmNyeXB0ZWQiOmZhbHNlLCJib2R5Ijp7ImZvbyI6ImJhciJ9fQ==';
+
+var expected = {
+    foo: "bar"
+};
+
+var decoded = HotPacket.decodeBase64(encoded);
+
+console.log('expect true: ', JSON.stringify(expected) === JSON.stringify(decoded.body));
+
 `;
         editor.setValue(code);
         eval(code);

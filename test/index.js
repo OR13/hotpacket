@@ -59,6 +59,40 @@ describe('HotPacket', function() {
         });
     });
 
+    describe('#encodeBase64(_env)', function() {
+        it('should return base64 string of stringified _env', function() {
+
+            var myObject = {
+                foo: "bar"
+            };
+
+            var env = HotPacket.new(myObject);
+
+            var b64Env = HotPacket.encodeBase64(env);
+
+            var expected = 'eyJ0eXBlIjoiSG90UGFja2V0RW52ZWxvcGUiLCJlbmNyeXB0ZWQiOmZhbHNlLCJib2R5Ijp7ImZvbyI6ImJhciJ9fQ==';
+
+            assert.equal(b64Env, expected);
+        });
+
+    });
+
+    describe('#decodeBase64(_string)', function() {
+        it('should return envelope object from base64 string', function() {
+
+            var encoded = 'eyJ0eXBlIjoiSG90UGFja2V0RW52ZWxvcGUiLCJlbmNyeXB0ZWQiOmZhbHNlLCJib2R5Ijp7ImZvbyI6ImJhciJ9fQ==';
+
+            var expected = {
+                foo: "bar"
+            };
+
+            var decoded = HotPacket.decodeBase64(encoded);
+            assert.equal(JSON.stringify(expected), JSON.stringify(decoded.body));
+
+        });
+
+    });
+
     describe('#isEqual(a, b)', function() {
         it('should return true if object strings are equal', function() {
             var results = HotPacket.isEqual({}, {});
@@ -70,6 +104,7 @@ describe('HotPacket', function() {
             assert.equal(results, false);
         });
     });
+
 
 });
 
