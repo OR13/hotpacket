@@ -1,5 +1,7 @@
 # HotPacket
 
+[![Build Status](https://travis-ci.org/OR13/hotpacket.svg?branch=master)](https://travis-ci.org/OR13/hotpacket)
+
 ## WARNING THIS IS AN EXPERIMENT. DO NOT USE.
 
 - Built with [SJCL](https://github.com/bitwiseshiftleft/sjcl)
