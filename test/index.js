@@ -10,6 +10,57 @@ describe('HotPacket', function() {
         })
     });
 
+    describe('#pack(_obj, _encrypted, _encoded)', function() {
+
+        it('pack(_obj, false, false) should return a HotPacketEnvelope object unencrypted', function() {
+            var _obj = {
+                foo: "bar"
+            };
+            var env = HotPacket.pack(_obj);
+            assert.equal(env.encrypted, false)
+            assert.equal(env.body, _obj)
+        });
+
+        it('pack(_obj, true, false) should return a HotPacketEnvelope object encrypted', function() {
+            var _obj = {
+                foo: "bar"
+            };
+            var env = HotPacket.pack(_obj, true, false);
+            assert.equal(env.encrypted, true)
+
+            // console.log(env)
+
+        });
+
+        it('pack(_obj, true, true) should return a HotPacketEnvelope object encrypted and encoded as base64', function() {
+            var _obj = {
+                foo: "bar"
+            };
+
+            var env = HotPacket.pack(_obj, true, true);
+
+            // console.log(env)
+
+            assert(typeof env === 'string')
+            assert.equal(env.length, 292)
+
+        });
+    });
+
+    describe('#unpack(_input)', function() {
+        it('unpack(_input) should return a HotPacketEnvelope object unencrypted', function() {
+            var _obj = {
+                foo: "bar"
+            };
+
+            var env = HotPacket.pack(_obj, true, true);
+            var unpacked_env = HotPacket.unpack(env);
+
+            assert.equal(unpacked_env.encrypted, false)
+            assert(HotPacket.isEqual(unpacked_env.body, _obj))
+        });
+
+    });
 
     describe('#new(_obj)', function() {
         it('should return the a decrypted HotPacketEnvelope with _obj body as its body', function() {

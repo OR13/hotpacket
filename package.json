@@ -1,6 +1,6 @@
 {
   "name": "hotpacket",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "HotPacket provides tools for javascript object encryption and encoding.",
   "main": "index.js",
   "scripts": {
