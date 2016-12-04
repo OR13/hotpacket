@@ -1,10 +1,11 @@
 # HotPacket
 
 [![Build Status](https://travis-ci.org/OR13/hotpacket.svg?branch=master)](https://travis-ci.org/OR13/hotpacket)
+[![NPM](https://nodei.co/npm/hotpacket.png)](https://nodei.co/npm/hotpacket/)
 
 ## WARNING THIS IS AN EXPERIMENT. DO NOT USE.
 
-- Built with [SJCL](https://github.com/bitwiseshiftleft/sjcl)
+- Crypto thanks to the very awesome [SJCL](https://github.com/bitwiseshiftleft/sjcl)
 
 HotPacket provides tools for javascript object encryption and encoding.
 
