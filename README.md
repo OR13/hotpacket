@@ -9,6 +9,7 @@
 HotPacket provides tools for javascript object encryption and encoding.
 
 ### Install
+
 ```
 var HotPacket = require('HotPacket');
 ```
@@ -71,4 +72,11 @@ var decoded = HotPacket.decodeBase64(encoded);
 
 console.log('expect true: ', JSON.stringify(expected) === JSON.stringify(decoded.body));
 
+```
+
+### Dev
+
+```
+$ npm run test
+$ npm run build
 ```
