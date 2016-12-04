@@ -11,6 +11,10 @@ HotPacket provides tools for javascript object encryption and encoding.
 ### Install
 
 ```
+$ npm install hotpacket --save
+```
+
+```
 var HotPacket = require('HotPacket');
 ```
 
