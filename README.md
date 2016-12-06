@@ -1,3 +1,9 @@
+
+
+You are probably looking for this: https://github.com/cisco/node-jose
+
+This project is abandoned.
+
 # HotPacket
 
 [![NPM](https://nodei.co/npm/hotpacket.png)](https://nodei.co/npm/hotpacket/)
